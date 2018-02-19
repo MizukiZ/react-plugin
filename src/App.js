@@ -15,7 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("wp-json/cmtemplate/v1/device")
+      .get(`${window.wp_home_url.base_url}/wp-json/cmtemplate/v1/device`)
       .then(response => {
         this.setState({ data: response.data })
       })
@@ -25,35 +25,22 @@ class App extends Component {
   }
 
   render() {
+
     const { data } = this.state
 
     return (
       <div className="App">
-        <div>
-          <h1> {data && data.apiKey}</h1>
-        </div>
-        {/* <header className="App-header">
-          {this.state.show && (
-            <img
-              src={this.state.data && this.state.data.avatar_url}
-              className="App-logo"
-              alt="logo"
-            />
-          )}
-          <h1 className="App-title">
-            {this.state.data && this.state.data.login}
-          </h1>
-          <button
-            onClick={() => {
-              this.toggle()
-            }}
-          >
-            Click
-          </button>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p> */}
+
+        {data &&
+          (
+            <div>
+              <h1> <span>Api key: </span> {data.apiKey}</h1>
+              <h1> <span>App id: </span> {data.appId}</h1>
+              <h1> <span>device id: </span> {data.deviceId}</h1>
+            </div>
+          )
+        }
+
       </div>
     )
   }
